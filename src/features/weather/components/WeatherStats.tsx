@@ -26,7 +26,10 @@ export default function WeatherStats({ weather }: Props) {
     : undefined;
 
   return (
-    <div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
+    <section
+      className='grid grid-cols-2 md:grid-cols-2 gap-4'
+      aria-label='Weather statistics'
+    >
       <StatCard
         label='Feels Like'
         value={current ? `${Math.round(current.temperature_2m)}°` : '-'}
@@ -54,6 +57,6 @@ export default function WeatherStats({ weather }: Props) {
             : '-'
         }
       />
-    </div>
+    </section>
   );
 }

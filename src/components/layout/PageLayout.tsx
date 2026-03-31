@@ -7,10 +7,10 @@ type PageLayoutProps = {
 
 export default function PageLayout({ children }: PageLayoutProps) {
   return (
-    <div className='min-h-screen bg-neutral-900'>
+    <div className='min-h-screen bg-neutral-900 flex flex-col'>
       <Header />
 
-      <main className='flex-1'>
+      <main id='main-content' className='flex-1 pb-12' role='main'>
         <Container>{children}</Container>
       </main>
     </div>

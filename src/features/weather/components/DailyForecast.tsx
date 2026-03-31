@@ -14,27 +14,39 @@ export default function DailyForecast({ data }: DailyForecastProps) {
   const days = data?.slice(0, 7) ?? [];
 
   return (
-    <div className='flex flex-col gap-2'>
-      <h2 className='text-white text-lg font-semibold'>Daily forecast</h2>
-      <div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4'>
+    <section 
+      className='flex flex-col gap-4'
+      aria-labelledby='daily-forecast-heading'
+    >
+      <h2 id='daily-forecast-heading' className='text-white text-lg font-semibold'>7-Day Forecast</h2>
+      <div 
+        className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4'
+        role='list'
+      >
         {days.length === 0
           ? Array.from({ length: 7 }).map((_, i) => <DayCard key={i} />)
           : days.map((day) => {
               const icon = getWeatherIcon(day.weathercode);
 
               return (
-                <DayCard
-                  key={day.dt}
-                  day={formatDay(day.dt)}
-                  icon={
-                    <img src={icon} alt='weather icon' className='w-8 h-8' />
-                  }
-                  maxTemp={Math.round(day.temp.max)}
-                  minTemp={Math.round(day.temp.min)}
-                />
+                <div key={day.dt} role='listitem'>
+                  <DayCard
+                    day={formatDay(day.dt)}
+                    icon={
+                      <img 
+                        src={icon} 
+                        alt='' 
+                        aria-hidden='true'
+                        className='w-8 h-8' 
+                      />
+                    }
+                    maxTemp={Math.round(day.temp.max)}
+                    minTemp={Math.round(day.temp.min)}
+                  />
+                </div>
               );
             })}
       </div>
-    </div>
+    </section>
   );
 }

@@ -40,35 +40,46 @@ export default function HourlyForecast({ data }: HourlyForecastProps) {
   }
 
   return (
-    <div className='flex flex-col gap-2 bg-neutral-800 rounded-xl p-4'>
+    <section 
+      className='flex flex-col gap-2 bg-neutral-800 rounded-xl p-4'
+      aria-labelledby='hourly-forecast-heading'
+    >
       <div className='flex items-center justify-between'>
-        <h2 className='text-white text-lg font-semibold'>Hourly forecast</h2>
-        <DailyDropdown selectedDay={selectedDay} onChangeDay={setSelectedDay} />
+        <h2 id='hourly-forecast-heading' className='text-white text-lg font-semibold'>Hourly forecast</h2>
+        <DailyDropdown 
+          selectedDay={selectedDay} 
+          onChangeDay={setSelectedDay}
+          aria-label='Select day for hourly forecast'
+        />
       </div>
 
-      {!data
-        ? Array.from({ length: 8 }).map((_, i) => (
-            <HourRow key={i} unit={temperature} />
-          ))
-        : filteredHours.slice(0, 8).map((hour) => (
-            <HourRow
-              key={hour.dt}
-              time={new Date(hour.dt * 1000).toLocaleTimeString('en-US', {
-                hour: 'numeric',
-                hour12: true,
-              })}
-              temperature={Math.round(
-                convertTemperature(hour.temp, temperature),
-              )}
-              unit={temperature}
-              icon={
-                <img
-                  src={getWeatherIcon(hour.weatherCode)}
-                  className='size-6'
-                />
-              }
-            />
-          ))}
-    </div>
+      <div role='list' className='flex flex-col gap-1'>
+        {!data
+          ? Array.from({ length: 8 }).map((_, i) => (
+              <HourRow key={i} unit={temperature} />
+            ))
+          : filteredHours.slice(0, 8).map((hour) => (
+              <HourRow
+                key={hour.dt}
+                time={new Date(hour.dt * 1000).toLocaleTimeString('en-US', {
+                  hour: 'numeric',
+                  hour12: true,
+                })}
+                temperature={Math.round(
+                  convertTemperature(hour.temp, temperature),
+                )}
+                unit={temperature}
+                icon={
+                  <img
+                    src={getWeatherIcon(hour.weatherCode)}
+                    alt=''
+                    aria-hidden='true'
+                    className='size-6'
+                  />
+                }
+              />
+            ))}
+      </div>
+    </section>
   );
 }

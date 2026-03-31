@@ -8,7 +8,7 @@ export default function Header() {
       <Container>
         <div className='flex items-center justify-between py-6'>
           <a href='/'>
-            <img src={logo} alt='Weather Now Logo' className='w-38 md:w-48' />
+            <img src={logo} alt='Weather Now Logo' className='w-34 md:w-48' />
           </a>
           <UnitsDropdown />
         </div>
