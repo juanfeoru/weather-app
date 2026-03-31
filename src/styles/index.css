@@ -13,10 +13,14 @@
 
   --color-blue-500: hsl(233, 67%, 56%);
   --color-blue-700: hsl(248, 70%, 36%);
+
+  --font-bricolage: 'Bricolage Grotesque', sans-serif;
+  --font-dmsans: 'DMSans', sans-serif;
 }
 
 body {
   font-size: 18px;
+  font-family: var(--font-dmsans);
 }
 
 @font-face {
